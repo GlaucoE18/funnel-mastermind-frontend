@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funnel Mastermind AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="brain-icon.svg" alt="Brain Icon">
+            <h1>Funnel Mastermind AI</h1>
+        </div>
+        <p class="tagline">Seu assistente pessoal para funis de vendas, copywriting e marketing digital</p>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="chat">💬 Chat com o Assistente</button>
+            <button class="tab-btn" data-tab="upload">📂 Upload de Documentos</button>
+            <button class="tab-btn" data-tab="funnel">🔍 Análise de Funis</button>
+            <button class="tab-btn" data-tab="email">✉️ Criação de E-mails</button>
+        </div>
+
+        <div class="tab-content">
+            <!-- Chat Tab -->
+            <div class="tab-pane active" id="chat">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message system">
+                            <p>Olá! Sou o Funnel Mastermind AI, seu assistente especializado em funis de vendas, copywriting e marketing digital. Como posso ajudar você hoje?</p>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="user-input" placeholder="Digite sua pergunta sobre funis, marketing, copywriting...">
+                        <button id="send-btn">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Tab -->
+            <div class="tab-pane" id="upload">
+                <div class="upload-container">
+                    <h2>Adicione documentos à base de conhecimento</h2>
+                    <form id="upload-form" class="document-form">
+                        <div class="file-upload">
+                            <label for="pdf-file">Selecione um arquivo PDF</label>
+                            <input type="file" id="pdf-file" accept=".pdf" required>
+                            <p class="file-name">Nenhum arquivo selecionado</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-title">Título do documento</label>
+                            <input type="text" id="doc-title" placeholder="Ex: Expert Secrets - Russell Brunson" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-author">Autor (opcional)</label>
+                            <input type="text" id="doc-author" placeholder="Ex: Russell Brunson">
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-category">Categoria (opcional)</label>
+                            <input type="text" id="doc-category" placeholder="Ex: Copywriting, Funis, Email Marketing">
+                        </div>
+                        <button type="submit" class="submit-btn">Fazer Upload</button>
+                    </form>
+                    <div class="upload-status" id="upload-status"></div>
+                    
+                    <div class="documents-list">
+                        <h3>Documentos na base de conhecimento</h3>
+                        <div id="documents-container">
+                            <p class="loading-docs">Carregando documentos...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funnel Analysis Tab -->
+            <div class="tab-pane" id="funnel">
+                <div class="funnel-container">
+                    <h2>Analise um funil de vendas</h2>
+                    <form id="funnel-form" class="analysis-form">
+                        <div class="form-group">
+                            <label for="funnel-description">Descreva seu funil de vendas em detalhes</label>
+                            <textarea id="funnel-description" rows="8" placeholder="Descreva seu funil de vendas em detalhes. Inclua etapas, produtos, pontos de conversão, e-mails, páginas, etc." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Analisar Funil</button>
+                    </form>
+                    <div class="analysis-results" id="funnel-results">
+                        <!-- Results will appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Creation Tab -->
+            <div class="tab-pane" id="email">
+                <div class="email-container">
+                    <h2>Crie e-mails com o framework F4</h2>
+                    <form id="email-form" class="email-form">
+                        <div class="form-group">
+                            <label for="email-offer">Produto ou Oferta</label>
+                            <input type="text" id="email-offer" placeholder="Ex: Curso de Funis Perpétuos" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-audience">Público-alvo</label>
+                            <input type="text" id="email-audience" placeholder="Ex: Designers que querem se tornar Funnel Builders" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-objective">Objetivo do e-mail</label>
+                            <input type="text" id="email-objective" placeholder="Ex: Convidar para um webinar gratuito" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Criar E-mail</button>
+                    </form>
+                    <div class="email-results" id="email-results">
+                        <!-- Results will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Funnel Mastermind AI | Desenvolvido por Glauco | v2.0.0</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
