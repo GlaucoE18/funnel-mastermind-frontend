@@ -49,15 +49,14 @@ function sendMessage() {
     const thinkingId = 'thinking-' + Date.now();
     addMessageToChat('assistant', 'Pensando...', thinkingId);
     
-    // Chama a API
-    fetch(`${API_URL}/query`, {
+    // Tenta chamar a API com retries
+    callAPIWithRetry(`${API_URL}/query`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ text: message })
-    })
-    .then(response => response.json())
+    }, 3) // 3 tentativas
     .then(data => {
         // Remove o indicador de "pensando..."
         const thinkingMessage = document.getElementById(thinkingId);
@@ -88,6 +87,36 @@ function sendMessage() {
         addMessageToChat('assistant', 'Desculpe, ocorreu um erro ao processar sua pergunta. Por favor, tente novamente.');
     });
 }
+
+// Função helper para fazer chamadas de API com retry
+async function callAPIWithRetry(url, options, maxRetries) {
+    let retries = 0;
+    
+    while (retries < maxRetries) {
+        try {
+            const response = await fetch(url, options);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            return await response.json();
+        } catch (error) {
+            retries++;
+            
+            if (retries >= maxRetries) {
+                throw error;
+            }
+            
+            // Espera um tempo antes de tentar novamente (exponential backoff)
+            const waitTime = Math.min(1000 * (2 ** retries), 10000);
+            console.log(`Tentativa ${retries} falhou. Tentando novamente em ${waitTime}ms...`);
+            
+            await new Promise(resolve => setTimeout(resolve, waitTime));
+        }
+    }
+}
+
 
 // Adiciona mensagem ao chat
 function addMessageToChat(role, text, id = null) {
